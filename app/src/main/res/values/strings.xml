@@ -3,4 +3,8 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="app_custom_title"><strong>TED</strong></string>
+    <string name="newest">Newest</string>
+    <string name="trending">Trending</string>
+    <string name="most_viewed">Most viewed</string>
+    <string name="hidden_gems">Hidden gems</string>
 </resources>

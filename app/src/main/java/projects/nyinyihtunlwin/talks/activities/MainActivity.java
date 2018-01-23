@@ -1,6 +1,7 @@
 package projects.nyinyihtunlwin.talks.activities;
 
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,7 +17,7 @@ import butterknife.ButterKnife;
 import projects.nyinyihtunlwin.talks.R;
 import projects.nyinyihtunlwin.talks.adapters.SectionPagerAdapter;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity{
 
     @BindView(R.id.tabs)
     TabLayout tabLayout;
@@ -27,6 +28,9 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.tv_section_name)
     TextView tvSectionName;
 
+    @BindView(R.id.tv_app_name)
+    TextView tvAppName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +40,8 @@ public class MainActivity extends BaseActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        tvAppName.setTypeface(Typeface.createFromAsset(getAssets(),"entsans.ttf"));
 
         SectionPagerAdapter sectionPagerAdapter = new SectionPagerAdapter(getSupportFragmentManager());
 
@@ -68,7 +74,5 @@ public class MainActivity extends BaseActivity {
                         .setAction("Action", null).show();
             }
         });
-
     }
-
 }

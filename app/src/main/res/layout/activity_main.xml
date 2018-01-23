@@ -35,14 +35,14 @@
                     android:gravity="center_vertical"
                     android:text="@string/app_custom_title"
                     android:textColor="@color/primary"
-                    android:textSize="25sp"
+                    android:textSize="23sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_section_name"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginStart= "@dimen/margin_medium"
                     android:gravity="center_vertical"
                     android:text="Talks"
                     android:textColor="@color/primary"
