@@ -5,13 +5,13 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
- * Created by Dell on 1/24/2018.
+ * Created by Dell on 1/25/2018.
  */
 
-public class PlaylistsVO {
+public class PodcastsVO {
 
-    @SerializedName("playlist_id")
-    private int playlistId;
+    @SerializedName("podcast_id")
+    private int podcastId;
 
     @SerializedName("title")
     private String title;
@@ -19,21 +19,18 @@ public class PlaylistsVO {
     @SerializedName("imageUrl")
     private String imageUrl;
 
-    @SerializedName("totalTalks")
-    private int totalTalks;
-
     @SerializedName("description")
     private String description;
 
-    @SerializedName("talksInPlaylist")
-    private List<TalksVO> talksInPlayListList;
+    @SerializedName("segments")
+    private List<SegmentVO> segments;
 
-    public int getPlaylistId() {
-        return playlistId;
+    public int getPodcastId() {
+        return podcastId;
     }
 
-    public void setPlaylistId(int playlistId) {
-        this.playlistId = playlistId;
+    public void setPodcastId(int podcastId) {
+        this.podcastId = podcastId;
     }
 
     public String getTitle() {
@@ -52,14 +49,6 @@ public class PlaylistsVO {
         this.imageUrl = imageUrl;
     }
 
-    public int getTotalTalks() {
-        return totalTalks;
-    }
-
-    public void setTotalTalks(int totalTalks) {
-        this.totalTalks = totalTalks;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -68,11 +57,11 @@ public class PlaylistsVO {
         this.description = description;
     }
 
-    public List<TalksVO> getTalksInPlayListList() {
-        return talksInPlayListList;
+    public List<SegmentVO> getSegments() {
+        return segments;
     }
 
-    public void setTalksInPlayListList(List<TalksVO> talksInPlayListList) {
-        this.talksInPlayListList = talksInPlayListList;
+    public void setSegments(List<SegmentVO> segments) {
+        this.segments = segments;
     }
 }
