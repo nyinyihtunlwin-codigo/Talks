@@ -43,7 +43,7 @@ public class MainActivity extends BaseActivity{
 
         tvAppName.setTypeface(Typeface.createFromAsset(getAssets(),"entsans.ttf"));
 
-        SectionPagerAdapter sectionPagerAdapter = new SectionPagerAdapter(getSupportFragmentManager());
+        final SectionPagerAdapter sectionPagerAdapter = new SectionPagerAdapter(getSupportFragmentManager());
 
         vpTalks.setAdapter(sectionPagerAdapter);
 
@@ -56,6 +56,7 @@ public class MainActivity extends BaseActivity{
             public void onTabSelected(TabLayout.Tab tab) {
                 int tabIconColor = ContextCompat.getColor(getApplicationContext(), R.color.primary);
                 tab.getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
+                vpTalks.setCurrentItem(tab.getPosition());
             }
 
             @Override

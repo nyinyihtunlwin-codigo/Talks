@@ -44,6 +44,7 @@ public class TalkFragment extends Fragment implements View.OnClickListener {
         ButterKnife.bind(this, view);
 
         tvNewest.setTextColor(getResources().getColor(R.color.primary));
+        setFragment(new TalkNewestFragment());
 
 
         tvNewest.setOnClickListener(this);
@@ -76,7 +77,7 @@ public class TalkFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setFragment(Fragment fragment) {
-        getFragmentManager().beginTransaction().replace(R.id.fl_talk_container,fragment).commit();
+        getFragmentManager().beginTransaction().replace(R.id.fl_talk_container, fragment).commit();
     }
 
 

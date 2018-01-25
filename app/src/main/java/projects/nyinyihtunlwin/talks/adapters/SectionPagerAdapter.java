@@ -4,6 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import projects.nyinyihtunlwin.talks.fragments.PlaylistsFragment;
+import projects.nyinyihtunlwin.talks.fragments.PodcastsFragment;
 import projects.nyinyihtunlwin.talks.fragments.TalkFragment;
 
 /**
@@ -24,10 +26,10 @@ public class SectionPagerAdapter extends FragmentPagerAdapter {
                 fragment = new TalkFragment();
                 break;
             case 1:
-                fragment = new TalkFragment();
+                fragment = new PlaylistsFragment();
                 break;
             case 2:
-                fragment = new TalkFragment();
+                fragment = new PodcastsFragment();
                 break;
             case 3:
                 fragment = new TalkFragment();

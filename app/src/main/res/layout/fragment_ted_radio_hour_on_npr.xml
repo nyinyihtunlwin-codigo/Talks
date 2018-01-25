@@ -8,7 +8,7 @@
         android:layout_height="match_parent">
 
         <projects.nyinyihtunlwin.talks.components.SmartRecyclerView
-            android:id="@+id/rv_newest"
+            android:id="@+id/rv_radio_hour_on_npr"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

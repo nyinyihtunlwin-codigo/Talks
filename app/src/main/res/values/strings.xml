@@ -7,4 +7,15 @@
     <string name="trending">Trending</string>
     <string name="most_viewed">Most viewed</string>
     <string name="hidden_gems">Hidden gems</string>
+    <string name="lbl_refersh">Refresh</string>
+    <string name="msg_generic_no_data">No data to display.</string>
+    <string name="talk_title_placeholder">What comes after tragedy?  Forgiveness</string>
+    <string name="talker_placeholder">Azim Khamisa and Ples Felix</string>
+    <string name="talk_time_placeholder">13:06</string>
+    <string name="talk_count_placeholder">7 talks</string>
+    <string name="talk_time_playlist_placeholder">1:12:27</string>
+    <string name="title_playlist_placeholder">Why not walk it out?</string>
+    <string name="radio_hour">TED Radio Hour on NPR</string>
+    <string name="sincerely_x">Sincerely, X</string>
+    <string name="radio_hour_title">Transparency</string>
 </resources>
