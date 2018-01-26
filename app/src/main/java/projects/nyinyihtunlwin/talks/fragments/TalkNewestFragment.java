@@ -1,5 +1,6 @@
 package projects.nyinyihtunlwin.talks.fragments;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
@@ -24,12 +25,14 @@ import projects.nyinyihtunlwin.talks.components.EmptyViewPod;
 import projects.nyinyihtunlwin.talks.components.SmartRecyclerView;
 import projects.nyinyihtunlwin.talks.data.model.TalksModel;
 import projects.nyinyihtunlwin.talks.data.vo.TalksVO;
+import projects.nyinyihtunlwin.talks.mvp.presenters.TalksPresenter;
+import projects.nyinyihtunlwin.talks.mvp.views.TalksView;
 
 /**
  * Created by Dell on 1/23/2018.
  */
 
-public class TalkNewestFragment extends BaseFragment {
+public class TalkNewestFragment extends BaseFragment implements TalksView, LifecycleOwner {
 
     @BindView(R.id.rv_newest)
     SmartRecyclerView rvNewest;
@@ -42,13 +45,19 @@ public class TalkNewestFragment extends BaseFragment {
 
     private TalksNewestAdapter mAdapter;
 
+
     private TalksModel mTalksModel;
+    private TalksPresenter mPresenter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_talk_newest, container, false);
         ButterKnife.bind(this, view);
+
+        mTalksModel = ViewModelProviders.of(this).get(TalksModel.class);
+        mPresenter = new TalksPresenter(mTalksModel);
+        mPresenter.onCreate(this);
 
 
         rvNewest.setHasFixedSize(true);
@@ -59,15 +68,7 @@ public class TalkNewestFragment extends BaseFragment {
 
         swipeRefreshLayout.setRefreshing(true);
 
-
-        mTalksModel = ViewModelProviders.of(this).get(TalksModel.class);
-        mTalksModel.getTedTalks().observe(this, new Observer<List<TalksVO>>() {
-            @Override
-            public void onChanged(@Nullable List<TalksVO> talksVOS) {
-                mAdapter.setNewData(talksVOS);
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
+        mPresenter.startLoadingTalks(this);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -77,5 +78,11 @@ public class TalkNewestFragment extends BaseFragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void displayTalksList(List<TalksVO> talksList) {
+        mAdapter.setNewData(talksList);
+        swipeRefreshLayout.setRefreshing(false);
     }
 }
