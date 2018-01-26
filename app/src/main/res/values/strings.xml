@@ -18,4 +18,13 @@
     <string name="radio_hour">TED Radio Hour on NPR</string>
     <string name="sincerely_x">Sincerely, X</string>
     <string name="radio_hour_title">Transparency</string>
+    <string name="recommended_topics">Recommended topics</string>
+    <string name="topics_plachholder">Foreign Policy</string>
+    <string name="show_all_topics">Show all topics</string>
+    <string name="recommended_speakers">Recommended speakers</string>
+    <string name="show_all_speakers">Show all speakers</string>
+    <string name="recommended_subtitle_lang">Recommended subtitle languages</string>
+    <string name="show_all_subtitle_lang">Show all subtitle languages</string>
+    <string name="recommended_events">Recommended events</string>
+    <string name="show_all_events">Show all events</string>
 </resources>

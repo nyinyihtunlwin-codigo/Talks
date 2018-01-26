@@ -39,4 +39,5 @@
     <dimen name="view_item_newest_height">180dp</dimen>
     <dimen name="margin_xxxlarge">100dp</dimen>
     <dimen name="view_item_podcast_height">300dp</dimen>
+    <dimen name="margin_xxxxlarge">62dp</dimen>
 </resources>

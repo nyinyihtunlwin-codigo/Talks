@@ -20,8 +20,30 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_weight="1"
             android:background="@color/primary"
-            app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:imeOptions="actionSearch"
+                    android:maxLines="1"
+                    android:background="@android:color/transparent"
+                    android:hint="Search TED Talks" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="@dimen/margin_medium_2"
+                    android:src="@drawable/ic_keyboard_voice_white_24dp" />
+            </LinearLayout>
+
 
         </android.support.v7.widget.Toolbar>
 
@@ -33,6 +55,19 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/view_search_topics" />
+
+            <include layout="@layout/view_search_speakers" />
+
+            <include layout="@layout/view_search_subtitle_languages" />
+
+            <include layout="@layout/view_search_events" />
+        </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
 
