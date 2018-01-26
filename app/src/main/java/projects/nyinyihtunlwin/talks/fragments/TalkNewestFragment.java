@@ -69,6 +69,13 @@ public class TalkNewestFragment extends BaseFragment {
             }
         });
 
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+            }
+        });
+
         return view;
     }
 }

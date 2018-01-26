@@ -28,6 +28,7 @@ public class PlaylistsFragment extends BaseFragment {
 
     private PlaylistsAdapter mAdapter;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

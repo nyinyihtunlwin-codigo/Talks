@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 import projects.nyinyihtunlwin.talks.R;
 import projects.nyinyihtunlwin.talks.adapters.SectionPagerAdapter;
 
-public class MainActivity extends BaseActivity{
+public class MainActivity extends BaseActivity {
 
     @BindView(R.id.tabs)
     TabLayout tabLayout;
@@ -41,7 +41,7 @@ public class MainActivity extends BaseActivity{
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        tvAppName.setTypeface(Typeface.createFromAsset(getAssets(),"entsans.ttf"));
+        tvAppName.setTypeface(Typeface.createFromAsset(getAssets(), "entsans.ttf"));
 
         final SectionPagerAdapter sectionPagerAdapter = new SectionPagerAdapter(getSupportFragmentManager());
 
@@ -50,13 +50,20 @@ public class MainActivity extends BaseActivity{
         int tabIconColor = ContextCompat.getColor(getApplicationContext(), R.color.primary);
         tabLayout.getTabAt(tabLayout.getSelectedTabPosition()).getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
 
-        vpTalks.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        vpTalks.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout) {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                setSectionTitle(position);
+            }
+        });
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(vpTalks) {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int tabIconColor = ContextCompat.getColor(getApplicationContext(), R.color.primary);
                 tab.getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
                 vpTalks.setCurrentItem(tab.getPosition());
+                setSectionTitle(tab.getPosition());
             }
 
             @Override
@@ -75,5 +82,27 @@ public class MainActivity extends BaseActivity{
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    private void setSectionTitle(int position) {
+        String sectionTitle = "";
+        switch (position) {
+            case 0:
+                sectionTitle = "Talks";
+                break;
+            case 1:
+                sectionTitle = "Playlists";
+                break;
+            case 2:
+                sectionTitle = "Podcasts";
+                break;
+            case 3:
+                sectionTitle = "Surprise Me";
+                break;
+            case 4:
+                sectionTitle = "My talks";
+                break;
+        }
+        tvSectionName.setText(sectionTitle);
     }
 }
