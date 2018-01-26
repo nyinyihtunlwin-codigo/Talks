@@ -9,6 +9,7 @@ import android.arch.persistence.room.Query;
 import java.util.List;
 
 import projects.nyinyihtunlwin.talks.data.vo.TalksVO;
+import projects.nyinyihtunlwin.talks.utils.AppConstants;
 
 @Dao
 public interface TedTalksDao {
@@ -19,9 +20,9 @@ public interface TedTalksDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long[] insertTalks(List<TalksVO> talksList);
 
-    @Query("SELECT * FROM talks")
+    @Query("SELECT * FROM " + AppConstants.TABLE_TALKS)
     LiveData<List<TalksVO>> getTedTalks();
 
-    @Query("DELETE FROM talks")
+    @Query("DELETE FROM " + AppConstants.TABLE_TALKS)
     void deleteAll();
 }

@@ -28,7 +28,7 @@ public interface TalksApi {
     Observable<GetPodcastsResponse> getPodcasts(@Field("page") int page, @Field("access_token") String accessToken);
 
 
-    @POST("/search.php")
+    @POST("search.php")
     @FormUrlEncoded
     Observable<GetSearchResponse> getSearchResults(@Field("page") int page, @Field("access_token") String accessToken);
 

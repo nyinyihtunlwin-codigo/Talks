@@ -24,14 +24,4 @@ public class SearchResultsAdapter extends BaseAdapter<SearchResultsViewHolder, S
         return new SearchResultsViewHolder(view);
     }
 
-    @Override
-    public void onBindViewHolder(SearchResultsViewHolder holder, int position) {
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return 16;
-    }
-
 }

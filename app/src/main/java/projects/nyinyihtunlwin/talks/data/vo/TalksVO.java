@@ -11,11 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import projects.nyinyihtunlwin.talks.data.db.converters.Converters;
+import projects.nyinyihtunlwin.talks.utils.AppConstants;
 
 /**
  * Created by Dell on 1/23/2018.
  */
-@Entity(tableName = "talks")
+@Entity(tableName = AppConstants.TABLE_TALKS)
 @TypeConverters({Converters.class})
 public class TalksVO {
 

@@ -27,7 +27,7 @@
         android:textSize="@dimen/text_small" />
 
     <TextView
-        android:id="@+id/tv_speaker"
+        android:id="@+id/tv_search_result_speaker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_medium"
@@ -43,9 +43,10 @@
         android:src="@drawable/ic_more_vert_grey_24dp" />
 
     <TextView
+        android:id="@+id/tv_search_result_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tv_speaker"
+        android:layout_below="@id/tv_search_result_speaker"
         android:layout_marginEnd="@dimen/margin_xxlarge"
         android:layout_marginStart="@dimen/margin_medium"
         android:layout_toEndOf="@id/iv_search_result"

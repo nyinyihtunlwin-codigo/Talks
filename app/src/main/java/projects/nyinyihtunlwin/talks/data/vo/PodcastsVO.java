@@ -1,15 +1,24 @@
 package projects.nyinyihtunlwin.talks.data.vo;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import projects.nyinyihtunlwin.talks.data.db.converters.SegmentVOConverter;
+import projects.nyinyihtunlwin.talks.utils.AppConstants;
+
 /**
  * Created by Dell on 1/25/2018.
  */
-
+@Entity(tableName = AppConstants.TABLE_PODCASTS)
+@TypeConverters(SegmentVOConverter.class)
 public class PodcastsVO {
 
+    @PrimaryKey
     @SerializedName("podcast_id")
     private int podcastId;
 

@@ -9,11 +9,12 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 import projects.nyinyihtunlwin.talks.data.db.converters.TalksVOConverter;
+import projects.nyinyihtunlwin.talks.utils.AppConstants;
 
 /**
  * Created by Dell on 1/24/2018.
  */
-@Entity(tableName = "playlists")
+@Entity(tableName = AppConstants.TABLE_PLAYLISTS)
 @TypeConverters(TalksVOConverter.class)
 public class PlaylistsVO {
 

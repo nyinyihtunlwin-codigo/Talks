@@ -32,10 +32,8 @@ public class SectionPagerAdapter extends FragmentPagerAdapter {
                 fragment = new PodcastsFragment();
                 break;
             case 3:
-                fragment = new TalkFragment();
                 break;
             case 4:
-                fragment = new TalkFragment();
                 break;
         }
         return fragment;
@@ -43,6 +41,6 @@ public class SectionPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 5;
+        return 3;
     }
 }

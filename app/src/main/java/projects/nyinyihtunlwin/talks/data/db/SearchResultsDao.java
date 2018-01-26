@@ -8,25 +8,26 @@ import android.arch.persistence.room.Query;
 
 import java.util.List;
 
-import projects.nyinyihtunlwin.talks.data.vo.PlaylistsVO;
+import projects.nyinyihtunlwin.talks.data.vo.SearchResultVO;
 import projects.nyinyihtunlwin.talks.utils.AppConstants;
 
 /**
  * Created by Dell on 1/26/2018.
  */
-
 @Dao
-public interface PlaylistsDao {
+public interface SearchResultsDao {
+
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insertPlaylist(PlaylistsVO playlistsVO);
+    long insertSearchResult(SearchResultVO searchResultVO);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long[] insertPlaylists(List<PlaylistsVO> talksList);
+    long[] insertSearchResults(List<SearchResultVO> searchResultVOList);
 
-    @Query("SELECT * FROM " + AppConstants.TABLE_PLAYLISTS)
-    LiveData<List<PlaylistsVO>> getPlaylists();
+    @Query("SELECT * FROM " + AppConstants.TABLE_SEARCH_RESULTS)
+    LiveData<List<SearchResultVO>> getSearchResults();
 
-    @Query("DELETE FROM " + AppConstants.TABLE_PLAYLISTS)
+    @Query("DELETE FROM " + AppConstants.TABLE_SEARCH_RESULTS)
     void deleteAll();
+
 }

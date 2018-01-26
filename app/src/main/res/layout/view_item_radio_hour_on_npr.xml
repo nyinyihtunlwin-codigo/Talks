@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/tedtalkviewholder" />
+                android:src="@drawable/img_ted_talk_placeholder" />
 
             <ImageView
                 android:id="@+id/iv_radio_hour_host"
@@ -33,7 +33,7 @@
                 android:layout_height="@dimen/margin_xxlarge"
                 android:layout_alignParentBottom="true"
                 android:layout_margin="@dimen/margin_card_medium_2"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/radio_hour" />
         </RelativeLayout>
 
         <RelativeLayout

@@ -1,13 +1,19 @@
 package projects.nyinyihtunlwin.talks.data.vo;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
+
+import projects.nyinyihtunlwin.talks.utils.AppConstants;
 
 /**
  * Created by Dell on 1/25/2018.
  */
-
+@Entity(tableName = AppConstants.TABLE_SEARCH_RESULTS)
 public class SearchResultVO {
 
+    @PrimaryKey
     @SerializedName("search_result_id")
     private int searchResultId;
 

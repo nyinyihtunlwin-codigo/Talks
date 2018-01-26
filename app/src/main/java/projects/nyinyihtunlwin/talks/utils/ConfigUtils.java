@@ -10,8 +10,10 @@ import projects.nyinyihtunlwin.talks.TalkApp;
  */
 
 public class ConfigUtils {
-
-    private static final String KEY_PAGE_INDEX = "KEY_PAGE_INDEX";
+    private static final String KEY_PAGE_TALK_INDEX = "KEY_PAGE_TALK_INDEX";
+    private static final String KEY_PAGE_PLAYLIST_INDEX = "KEY_PAGE_PLAYLIST_INDEX";
+    private static final String KEY_PAGE_PODCASTS_INDEX = "KEY_PAGE_PODCASTS_INDEX";
+    private static final String KEY_PAGE_SEARCH_INDEX = "KEY_PAGE_SEARCH_INDEX";
 
     private static ConfigUtils mObjInstance;
 
@@ -28,12 +30,35 @@ public class ConfigUtils {
         return mObjInstance;
     }
 
-
-    public void savePageIndex(int pageIndex) {
-        mSharedPreferences.edit().putInt(KEY_PAGE_INDEX, pageIndex).apply();
+    public void saveTalksPageIndex(int pageIndex) {
+        mSharedPreferences.edit().putInt(KEY_PAGE_TALK_INDEX, pageIndex).apply();
     }
 
-    public int loadPageIndex() {
-        return mSharedPreferences.getInt(KEY_PAGE_INDEX, 1);
+    public int loadTalksPageIndex() {
+        return mSharedPreferences.getInt(KEY_PAGE_TALK_INDEX, 1);
+    }
+
+    public void savePlaylistsPageIndex(int pageIndex) {
+        mSharedPreferences.edit().putInt(KEY_PAGE_PLAYLIST_INDEX, pageIndex).apply();
+    }
+
+    public int loadPlaylistsPageIndex() {
+        return mSharedPreferences.getInt(KEY_PAGE_PLAYLIST_INDEX, 1);
+    }
+
+    public void savePodcastsPageIndex(int pageIndex) {
+        mSharedPreferences.edit().putInt(KEY_PAGE_PODCASTS_INDEX, pageIndex).apply();
+    }
+
+    public int loadPodcastsIndex() {
+        return mSharedPreferences.getInt(KEY_PAGE_PODCASTS_INDEX, 1);
+    }
+
+    public void saveSearchResultPageIndex(int pageIndex) {
+        mSharedPreferences.edit().putInt(KEY_PAGE_SEARCH_INDEX, pageIndex).apply();
+    }
+
+    public int loadSearchResultsIndex() {
+        return mSharedPreferences.getInt(KEY_PAGE_SEARCH_INDEX, 1);
     }
 }

@@ -10,6 +10,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.TextView;
 
@@ -79,7 +81,7 @@ public class MainActivity extends BaseActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = SearchResultActivity.newIntent(getApplicationContext());
+                Intent intent = SearchActivity.newIntent(getApplicationContext());
                 startActivity(intent);
             }
         });
@@ -105,5 +107,12 @@ public class MainActivity extends BaseActivity {
                 break;
         }
         tvSectionName.setText(sectionTitle);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
     }
 }

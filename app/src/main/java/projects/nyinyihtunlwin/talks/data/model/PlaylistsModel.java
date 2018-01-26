@@ -44,18 +44,18 @@ public class PlaylistsModel extends BaseModel {
     }
 
     public LiveData<List<PlaylistsVO>> loadMorePlaylists() {
-        int i = ConfigUtils.getInstance().loadPageIndex();
-        return loadPlaylists(ConfigUtils.getInstance().loadPageIndex(), AppConstants.ACCESS_TOKEN);
+        int i = ConfigUtils.getInstance().loadPlaylistsPageIndex();
+        return loadPlaylists(ConfigUtils.getInstance().loadPlaylistsPageIndex(), AppConstants.ACCESS_TOKEN);
     }
 
     public LiveData<List<PlaylistsVO>> onForceRefreshPlaylists() {
-        ConfigUtils.getInstance().savePageIndex(1);
+        ConfigUtils.getInstance().savePlaylistsPageIndex(1);
         mPlaylistsList = new MutableLiveData<>();
-        return loadPlaylists(ConfigUtils.getInstance().loadPageIndex(), AppConstants.ACCESS_TOKEN);
+        return loadPlaylists(ConfigUtils.getInstance().loadPlaylistsPageIndex(), AppConstants.ACCESS_TOKEN);
     }
 
     public LiveData<List<PlaylistsVO>> startLoadingPlaylists() {
-        return loadPlaylists(ConfigUtils.getInstance().loadPageIndex(), AppConstants.ACCESS_TOKEN);
+        return loadPlaylists(ConfigUtils.getInstance().loadPlaylistsPageIndex(), AppConstants.ACCESS_TOKEN);
     }
 
     public LiveData<List<PlaylistsVO>> getPlaylists() {
@@ -78,7 +78,7 @@ public class PlaylistsModel extends BaseModel {
                     public void onNext(@NonNull GetPlaylistsResponse getPlaylistsResponse) {
                         if (getPlaylistsResponse.getPlaylistsVOList() != null && getPlaylistsResponse.getPlaylistsVOList().size() > 0) {
                             mPlaylistsList.setValue(getPlaylistsResponse.getPlaylistsVOList());
-                            ConfigUtils.getInstance().savePageIndex(getPlaylistsResponse.getPage() + 1);
+                            ConfigUtils.getInstance().savePlaylistsPageIndex(getPlaylistsResponse.getPage() + 1);
                             mAppDatabase.playlistsDao().deleteAll();
                             long[] insertedIds = mAppDatabase.playlistsDao().insertPlaylists(getPlaylistsResponse.getPlaylistsVOList());
                             Log.d(TalkApp.TAG, "Total inserted count : " + insertedIds.length);

@@ -36,7 +36,7 @@ public class PodcastsFragment extends BaseFragment implements View.OnClickListen
         ButterKnife.bind(this, view);
 
         tvNPR.setTextColor(getResources().getColor(R.color.primary));
-        setFragment(new TalkNewestFragment());
+        setFragment(new TEDRadioHourOnNPRFragment());
 
 
         tvNPR.setOnClickListener(this);
@@ -68,7 +68,6 @@ public class PodcastsFragment extends BaseFragment implements View.OnClickListen
                 break;
             case R.id.tv_x:
                 changeTextColor(1);
-                setFragment(new TalkTrendingFragment());
                 break;
         }
     }

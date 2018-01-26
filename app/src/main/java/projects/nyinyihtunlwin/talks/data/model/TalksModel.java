@@ -53,18 +53,18 @@ public class TalksModel extends BaseModel {
     }
 
     public LiveData<List<TalksVO>> loadMoreTedTalks() {
-        int i = ConfigUtils.getInstance().loadPageIndex();
-        return loadTedTalks(ConfigUtils.getInstance().loadPageIndex(), AppConstants.ACCESS_TOKEN);
+        int i = ConfigUtils.getInstance().loadTalksPageIndex();
+        return loadTedTalks(ConfigUtils.getInstance().loadTalksPageIndex(), AppConstants.ACCESS_TOKEN);
     }
 
     public LiveData<List<TalksVO>> onForceRefreshTedTalks() {
-        ConfigUtils.getInstance().savePageIndex(1);
+        ConfigUtils.getInstance().saveTalksPageIndex(1);
         mTalksVOList = new MutableLiveData<>();
-        return loadTedTalks(ConfigUtils.getInstance().loadPageIndex(), AppConstants.ACCESS_TOKEN);
+        return loadTedTalks(ConfigUtils.getInstance().loadTalksPageIndex(), AppConstants.ACCESS_TOKEN);
     }
 
     public LiveData<List<TalksVO>> startLoadingTedTalks() {
-        return loadTedTalks(ConfigUtils.getInstance().loadPageIndex(), AppConstants.ACCESS_TOKEN);
+        return loadTedTalks(ConfigUtils.getInstance().loadTalksPageIndex(), AppConstants.ACCESS_TOKEN);
     }
 
     public LiveData<List<TalksVO>> getmTalksVOList() {
@@ -87,7 +87,7 @@ public class TalksModel extends BaseModel {
                     public void onNext(@NonNull GetTalksResponse getTalksResponse) {
                         if (getTalksResponse.getTalksVOList() != null && getTalksResponse.getTalksVOList().size() > 0) {
                             mTalksVOList.setValue(getTalksResponse.getTalksVOList());
-                            ConfigUtils.getInstance().savePageIndex(getTalksResponse.getPage() + 1);
+                            ConfigUtils.getInstance().saveTalksPageIndex(getTalksResponse.getPage() + 1);
                             mAppDatabase.tedTalksDao().deleteAll();
                             long[] insertedIds = mAppDatabase.tedTalksDao().insertTalks(getTalksResponse.getTalksVOList());
                             Log.d(TalkApp.TAG, "Total inserted count : " + insertedIds.length);
