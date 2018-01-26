@@ -15,15 +15,15 @@ import retrofit2.http.POST;
 
 public interface TalksApi {
 
-    @POST("/getTedTalks.php")
+    @POST("getTedTalks.php")
     @FormUrlEncoded
     Observable<GetTalksResponse> getTedTalkList(@Field("page") int page, @Field("access_token") String accessToken);
 
-    @POST("/getPlayLists.php")
+    @POST("getPlayLists.php")
     @FormUrlEncoded
     Observable<GetPlaylistsResponse> getPlaylists(@Field("page") int page, @Field("access_token") String accessToken);
 
-    @POST("/getPodcasts.php")
+    @POST("getPodcasts.php")
     @FormUrlEncoded
     Observable<GetPodcastsResponse> getPodcasts(@Field("page") int page, @Field("access_token") String accessToken);
 

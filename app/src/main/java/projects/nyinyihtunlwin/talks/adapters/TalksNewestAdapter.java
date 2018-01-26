@@ -23,14 +23,4 @@ public class TalksNewestAdapter extends BaseAdapter<TalksNewestViewHolder, Talks
         View view = mLayoutInflater.inflate(R.layout.view_item_talks_newest, parent, false);
         return new TalksNewestViewHolder(view);
     }
-
-    @Override
-    public void onBindViewHolder(TalksNewestViewHolder holder, int position) {
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return 16;
-    }
 }

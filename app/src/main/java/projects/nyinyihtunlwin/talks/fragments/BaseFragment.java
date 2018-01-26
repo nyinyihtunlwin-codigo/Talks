@@ -6,5 +6,5 @@ import android.support.v4.app.Fragment;
  * Created by Dell on 1/23/2018.
  */
 
-public class BaseFragment extends Fragment {
+public class BaseFragment extends Fragment{
 }

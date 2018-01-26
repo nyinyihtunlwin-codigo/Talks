@@ -1,22 +1,28 @@
 package projects.nyinyihtunlwin.talks.data.model;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
-import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
+
+import com.google.gson.Gson;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import projects.nyinyihtunlwin.talks.TalkApp;
+import okhttp3.OkHttpClient;
 import projects.nyinyihtunlwin.talks.data.vo.TalksVO;
+import projects.nyinyihtunlwin.talks.network.TalksApi;
 import projects.nyinyihtunlwin.talks.network.responses.GetTalksResponse;
 import projects.nyinyihtunlwin.talks.utils.AppConstants;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by Dell on 1/25/2018.
@@ -24,17 +30,40 @@ import projects.nyinyihtunlwin.talks.utils.AppConstants;
 
 public class TalksModel extends ViewModel {
 
-    private Context mContext;
-    private TalkApp mTalkApp;
     private int mPageIndex = 1;
+    private TalksApi mTalkApi;
 
-    public TalksModel(Context context) {
-        this.mContext = context;
-        mTalkApp = (TalkApp) context;
+    private MutableLiveData<List<TalksVO>> mTalksVOList;
+
+    public TalksModel() {
+        mTalksVOList = new MutableLiveData<>();
+        initTedTalksApi();
     }
 
-    public void getTedTalks() {
-        Observable<GetTalksResponse> talksResponseObservable = mTalkApp.getTalkApi().getTedTalkList(mPageIndex, AppConstants.ACCESS_TOKEN);
+    private void initTedTalksApi() {
+        final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(15, TimeUnit.SECONDS)
+                .writeTimeout(15, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .build();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(AppConstants.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(new Gson()))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(okHttpClient)
+                .build();
+
+        mTalkApi = retrofit.create(TalksApi.class);
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+    }
+
+    public LiveData<List<TalksVO>> getTedTalks() {
+        Observable<GetTalksResponse> talksResponseObservable = mTalkApi.getTedTalkList(mPageIndex, AppConstants.ACCESS_TOKEN);
         talksResponseObservable
                 .subscribeOn(Schedulers.io()) //run value creation code on a specific thread (non-UI thread)
                 .observeOn(AndroidSchedulers.mainThread()) //observe the emitted value of the Observable on an appropriate thread
@@ -47,9 +76,7 @@ public class TalksModel extends ViewModel {
 
                     @Override
                     public void onNext(@NonNull GetTalksResponse getTalksResponse) {
-                        for (TalksVO talksVO : getTalksResponse.getTalksVOList()) {
-                            Log.e("talkvo", talksVO.getTitle());
-                        }
+                        mTalksVOList.setValue(getTalksResponse.getTalksVOList());
                     }
 
                     @Override
@@ -62,7 +89,6 @@ public class TalksModel extends ViewModel {
 
                     }
                 });
+        return mTalksVOList;
     }
-
-
 }

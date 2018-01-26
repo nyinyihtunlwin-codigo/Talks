@@ -15,6 +15,7 @@
         android:layout_height="@dimen/view_item_newest_height">
 
         <ImageView
+            android:id="@+id/iv_talk_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
@@ -24,10 +25,9 @@
             android:id="@+id/tv_talk_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/margin_medium_1"
-            android:layout_marginEnd="@dimen/margin_xxxlarge"
-            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_alignBottom="@+id/tv_talked_time"
+            android:layout_alignStart="@+id/tv_talker"
+            android:layout_marginEnd="@dimen/margin_xxlarge"
             android:maxLines="3"
             android:text="@string/talk_title_placeholder"
             android:textColor="@color/white"
