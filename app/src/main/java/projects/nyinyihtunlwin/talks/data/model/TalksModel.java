@@ -67,8 +67,13 @@ public class TalksModel extends ViewModel {
         return loadTedTalks(ConfigUtils.getInstance().loadPageIndex(), AppConstants.ACCESS_TOKEN);
     }
 
-    public LiveData<List<TalksVO>> startLoadingTedTalks() {
+    public LiveData<List<TalksVO>> onForceRefreshTedTalks() {
         ConfigUtils.getInstance().savePageIndex(1);
+        mTalksVOList=new MutableLiveData<>();
+        return loadTedTalks(ConfigUtils.getInstance().loadPageIndex(), AppConstants.ACCESS_TOKEN);
+    }
+
+    public LiveData<List<TalksVO>> startLoadingTedTalks() {
         return loadTedTalks(ConfigUtils.getInstance().loadPageIndex(), AppConstants.ACCESS_TOKEN);
     }
 
@@ -83,6 +88,7 @@ public class TalksModel extends ViewModel {
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
+
                     @Override
                     public void onNext(@NonNull GetTalksResponse getTalksResponse) {
                         if (getTalksResponse.getTalksVOList() != null && getTalksResponse.getTalksVOList().size() > 0) {

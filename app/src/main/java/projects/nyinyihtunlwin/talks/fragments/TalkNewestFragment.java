@@ -76,7 +76,7 @@ public class TalkNewestFragment extends BaseFragment implements TalksView, Lifec
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPresenter.startLoadingTalks(getActivity());
+                mPresenter.forceRefreshTedTalks(getActivity());
             }
         });
 

@@ -33,7 +33,7 @@ public class TalksPresenter extends BasePresenter<TalksView> {
 
     }
 
-    public void loadMoreTalks(LifecycleOwner lifecycleOwner){
+    public void loadMoreTalks(LifecycleOwner lifecycleOwner) {
         mTalksModel.loadMoreTedTalks().observe(lifecycleOwner, new Observer<List<TalksVO>>() {
             @Override
             public void onChanged(@Nullable List<TalksVO> talksVOS) {
@@ -42,8 +42,13 @@ public class TalksPresenter extends BasePresenter<TalksView> {
         });
     }
 
-    public void forceRefreshTedTalks() {
-
+    public void forceRefreshTedTalks(LifecycleOwner lifecycleOwner) {
+        mTalksModel.onForceRefreshTedTalks().observe(lifecycleOwner, new Observer<List<TalksVO>>() {
+            @Override
+            public void onChanged(@Nullable List<TalksVO> talksVOS) {
+                mView.displayTalksList(talksVOS);
+            }
+        });
     }
 
     public void startLoadingTalks(LifecycleOwner lifecycleOwner) {
