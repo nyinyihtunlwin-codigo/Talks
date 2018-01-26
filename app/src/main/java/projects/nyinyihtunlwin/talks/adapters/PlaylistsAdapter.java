@@ -25,13 +25,4 @@ public class PlaylistsAdapter extends BaseAdapter<PlaylistsViewHolder, Playlists
         return new PlaylistsViewHolder(view);
     }
 
-    @Override
-    public void onBindViewHolder(PlaylistsViewHolder holder, int position) {
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return 16;
-    }
 }

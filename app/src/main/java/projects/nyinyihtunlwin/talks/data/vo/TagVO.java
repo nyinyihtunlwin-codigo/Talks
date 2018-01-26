@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  */
 
 @Entity(tableName = "tags")
-public class TagVO {
+public class TagVO{
 
     @PrimaryKey
     @SerializedName("tag_id")

@@ -2,6 +2,7 @@ package projects.nyinyihtunlwin.talks.mvp.presenters;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.Nullable;
 
 import java.util.List;

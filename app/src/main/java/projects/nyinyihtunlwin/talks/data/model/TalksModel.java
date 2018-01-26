@@ -33,10 +33,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by Dell on 1/25/2018.
  */
 
-public class TalksModel extends ViewModel {
-
-    private TalksApi mTalkApi;
-    private AppDatabase mAppDatabase;
+public class TalksModel extends BaseModel {
 
     private MutableLiveData<List<TalksVO>> mTalksVOList;
 
@@ -44,24 +41,6 @@ public class TalksModel extends ViewModel {
         mTalksVOList = new MutableLiveData<>();
         initTedTalksApi();
     }
-
-    private void initTedTalksApi() {
-        final OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .connectTimeout(15, TimeUnit.SECONDS)
-                .writeTimeout(15, TimeUnit.SECONDS)
-                .readTimeout(60, TimeUnit.SECONDS)
-                .build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(AppConstants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(new Gson()))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(okHttpClient)
-                .build();
-
-        mTalkApi = retrofit.create(TalksApi.class);
-    }
-
 
     public void initDatabase(Context context) {
         mAppDatabase = AppDatabase.getInMemoryDatabase(context);

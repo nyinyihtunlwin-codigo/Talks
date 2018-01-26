@@ -98,7 +98,7 @@ public class TalkNewestFragment extends BaseFragment implements TalksView, Lifec
 
     @Override
     public void displayTalksList(List<TalksVO> talksList) {
-        mAdapter.setNewData(talksList);
+        mAdapter.appendNewData(talksList);
         swipeRefreshLayout.setRefreshing(false);
     }
 }

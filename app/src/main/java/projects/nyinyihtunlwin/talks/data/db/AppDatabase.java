@@ -21,9 +21,10 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
+import projects.nyinyihtunlwin.talks.data.vo.PlaylistsVO;
 import projects.nyinyihtunlwin.talks.data.vo.TalksVO;
 
-@Database(entities = {TalksVO.class}, version = 1,exportSchema = false)
+@Database(entities = {TalksVO.class, PlaylistsVO.class}, version = 1,exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String DB_NAME = "PADC-TED_TALK.DB";
@@ -31,6 +32,7 @@ public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase INSTANCE;
 
     public abstract TedTalksDao tedTalksDao();
+    public abstract PlaylistsDao playlistsDao();
 
     public static AppDatabase getInMemoryDatabase(Context context) {
         if (INSTANCE == null) {

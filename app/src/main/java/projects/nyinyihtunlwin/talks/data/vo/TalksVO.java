@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-import projects.nyinyihtunlwin.talks.data.db.Converters;
+import projects.nyinyihtunlwin.talks.data.db.converters.Converters;
 
 /**
  * Created by Dell on 1/23/2018.
