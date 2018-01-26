@@ -60,7 +60,7 @@ public class TalkNewestFragment extends BaseFragment implements TalksView, Lifec
 
         mTalksModel = ViewModelProviders.of(this).get(TalksModel.class);
         mTalksModel.initDatabase(getActivity());
-        mPresenter = new TalksPresenter(mTalksModel);
+        mPresenter = new TalksPresenter(this, mTalksModel);
         mPresenter.onCreate(this);
 
 
@@ -71,8 +71,6 @@ public class TalkNewestFragment extends BaseFragment implements TalksView, Lifec
         rvNewest.setLayoutManager(new LinearLayoutManager(container.getContext()));
 
         swipeRefreshLayout.setRefreshing(true);
-
-        mPresenter.startLoadingTalks(this);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -93,8 +91,14 @@ public class TalkNewestFragment extends BaseFragment implements TalksView, Lifec
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        mPresenter.onStart();
+    }
+
+    @Override
     public void displayTalksList(List<TalksVO> talksList) {
-        mAdapter.appendNewData(talksList);
+        mAdapter.setNewData(talksList);
         swipeRefreshLayout.setRefreshing(false);
     }
 }

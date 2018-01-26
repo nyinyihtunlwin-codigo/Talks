@@ -70,6 +70,7 @@ public class TalksModel extends ViewModel {
     @Override
     protected void onCleared() {
         super.onCleared();
+        AppDatabase.destroyInstance();
     }
 
     public LiveData<List<TalksVO>> loadMoreTedTalks() {
@@ -79,12 +80,16 @@ public class TalksModel extends ViewModel {
 
     public LiveData<List<TalksVO>> onForceRefreshTedTalks() {
         ConfigUtils.getInstance().savePageIndex(1);
-        mTalksVOList=new MutableLiveData<>();
+        mTalksVOList = new MutableLiveData<>();
         return loadTedTalks(ConfigUtils.getInstance().loadPageIndex(), AppConstants.ACCESS_TOKEN);
     }
 
     public LiveData<List<TalksVO>> startLoadingTedTalks() {
         return loadTedTalks(ConfigUtils.getInstance().loadPageIndex(), AppConstants.ACCESS_TOKEN);
+    }
+
+    public LiveData<List<TalksVO>> getmTalksVOList() {
+        return mAppDatabase.tedTalksDao().getTedTalks();
     }
 
     public LiveData<List<TalksVO>> loadTedTalks(int pageIndex, String accessToken) {
@@ -105,7 +110,7 @@ public class TalksModel extends ViewModel {
                             mTalksVOList.setValue(getTalksResponse.getTalksVOList());
                             ConfigUtils.getInstance().savePageIndex(getTalksResponse.getPage() + 1);
                             mAppDatabase.tedTalksDao().deleteAll();
-                            long[] insertedIds=mAppDatabase.tedTalksDao().insertTalks(getTalksResponse.getTalksVOList());
+                            long[] insertedIds = mAppDatabase.tedTalksDao().insertTalks(getTalksResponse.getTalksVOList());
                             Log.d(TalkApp.TAG, "Total inserted count : " + insertedIds.length);
                         }
                     }

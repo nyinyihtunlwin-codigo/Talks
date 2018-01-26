@@ -17,20 +17,29 @@ import projects.nyinyihtunlwin.talks.mvp.views.TalksView;
 public class TalksPresenter extends BasePresenter<TalksView> {
 
     private TalksModel mTalksModel;
+    private LifecycleOwner mLifeCycleOwner;
 
-    public TalksPresenter(TalksModel mTalksModel) {
+    public TalksPresenter(LifecycleOwner lifecycleOwner, TalksModel mTalksModel) {
         super();
         this.mTalksModel = mTalksModel;
+        this.mLifeCycleOwner = lifecycleOwner;
+        startLoadingTalks(lifecycleOwner);
     }
 
     @Override
     public void onCreate(TalksView mView) {
         super.onCreate(mView);
+
     }
 
     @Override
     public void onStart() {
-
+        mTalksModel.getmTalksVOList().observe(mLifeCycleOwner, new Observer<List<TalksVO>>() {
+            @Override
+            public void onChanged(@Nullable List<TalksVO> talksVOS) {
+                mView.displayTalksList(talksVOS);
+            }
+        });
     }
 
     public void loadMoreTalks(LifecycleOwner lifecycleOwner) {
