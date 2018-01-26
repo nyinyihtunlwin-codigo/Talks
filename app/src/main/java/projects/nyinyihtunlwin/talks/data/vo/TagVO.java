@@ -1,13 +1,18 @@
 package projects.nyinyihtunlwin.talks.data.vo;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Dell on 1/25/2018.
  */
 
+@Entity(tableName = "tags")
 public class TagVO {
 
+    @PrimaryKey
     @SerializedName("tag_id")
     private int tagId;
 

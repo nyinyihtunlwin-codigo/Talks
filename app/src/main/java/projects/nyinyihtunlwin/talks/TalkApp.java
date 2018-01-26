@@ -9,6 +9,7 @@ import android.content.Context;
 
 public class TalkApp extends Application {
 
+    public static final String TAG ="TED_TALK" ;
     private static Context context;
 
     @Override

@@ -1,22 +1,32 @@
 package projects.nyinyihtunlwin.talks.data.vo;
 
+import android.arch.persistence.room.Embedded;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import projects.nyinyihtunlwin.talks.data.db.Converters;
+
 /**
  * Created by Dell on 1/23/2018.
  */
-
+@Entity(tableName = "talks")
+@TypeConverters({Converters.class})
 public class TalksVO {
 
+    @PrimaryKey
     @SerializedName("talk_id")
     private int talkId;
 
     @SerializedName("title")
     private String title;
 
+    @Embedded
     @SerializedName("speaker")
     private SpeakerVO speaker;
 

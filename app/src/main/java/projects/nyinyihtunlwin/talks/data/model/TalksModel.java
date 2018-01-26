@@ -3,7 +3,9 @@ package projects.nyinyihtunlwin.talks.data.model;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -17,6 +19,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
+import projects.nyinyihtunlwin.talks.TalkApp;
+import projects.nyinyihtunlwin.talks.data.db.AppDatabase;
 import projects.nyinyihtunlwin.talks.data.vo.TalksVO;
 import projects.nyinyihtunlwin.talks.network.TalksApi;
 import projects.nyinyihtunlwin.talks.network.responses.GetTalksResponse;
@@ -32,6 +36,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class TalksModel extends ViewModel {
 
     private TalksApi mTalkApi;
+    private AppDatabase mAppDatabase;
 
     private MutableLiveData<List<TalksVO>> mTalksVOList;
 
@@ -55,6 +60,11 @@ public class TalksModel extends ViewModel {
                 .build();
 
         mTalkApi = retrofit.create(TalksApi.class);
+    }
+
+
+    public void initDatabase(Context context) {
+        mAppDatabase = AppDatabase.getInMemoryDatabase(context);
     }
 
     @Override
@@ -94,6 +104,9 @@ public class TalksModel extends ViewModel {
                         if (getTalksResponse.getTalksVOList() != null && getTalksResponse.getTalksVOList().size() > 0) {
                             mTalksVOList.setValue(getTalksResponse.getTalksVOList());
                             ConfigUtils.getInstance().savePageIndex(getTalksResponse.getPage() + 1);
+                            mAppDatabase.tedTalksDao().deleteAll();
+                            long[] insertedIds=mAppDatabase.tedTalksDao().insertTalks(getTalksResponse.getTalksVOList());
+                            Log.d(TalkApp.TAG, "Total inserted count : " + insertedIds.length);
                         }
                     }
 

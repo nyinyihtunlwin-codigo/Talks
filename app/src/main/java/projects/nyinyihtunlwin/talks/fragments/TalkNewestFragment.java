@@ -59,6 +59,7 @@ public class TalkNewestFragment extends BaseFragment implements TalksView, Lifec
         ButterKnife.bind(this, view);
 
         mTalksModel = ViewModelProviders.of(this).get(TalksModel.class);
+        mTalksModel.initDatabase(getActivity());
         mPresenter = new TalksPresenter(mTalksModel);
         mPresenter.onCreate(this);
 
