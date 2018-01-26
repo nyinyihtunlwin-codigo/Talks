@@ -23,6 +23,7 @@ import projects.nyinyihtunlwin.talks.R;
 import projects.nyinyihtunlwin.talks.adapters.TalksNewestAdapter;
 import projects.nyinyihtunlwin.talks.components.EmptyViewPod;
 import projects.nyinyihtunlwin.talks.components.SmartRecyclerView;
+import projects.nyinyihtunlwin.talks.components.SmartScrollListener;
 import projects.nyinyihtunlwin.talks.data.model.TalksModel;
 import projects.nyinyihtunlwin.talks.data.vo.TalksVO;
 import projects.nyinyihtunlwin.talks.mvp.presenters.TalksPresenter;
@@ -49,6 +50,8 @@ public class TalkNewestFragment extends BaseFragment implements TalksView, Lifec
     private TalksModel mTalksModel;
     private TalksPresenter mPresenter;
 
+    private SmartScrollListener mSmartScrollListener;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -73,16 +76,24 @@ public class TalkNewestFragment extends BaseFragment implements TalksView, Lifec
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                mPresenter.startLoadingTalks(getActivity());
             }
         });
+
+        mSmartScrollListener = new SmartScrollListener(new SmartScrollListener.OnSmartScrollListener() {
+            @Override
+            public void onListEndReached() {
+                mPresenter.loadMoreTalks(getActivity());
+            }
+        });
+        rvNewest.addOnScrollListener(mSmartScrollListener);
 
         return view;
     }
 
     @Override
     public void displayTalksList(List<TalksVO> talksList) {
-        mAdapter.setNewData(talksList);
+        mAdapter.appendNewData(talksList);
         swipeRefreshLayout.setRefreshing(false);
     }
 }

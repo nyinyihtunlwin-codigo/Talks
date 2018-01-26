@@ -21,6 +21,7 @@ import projects.nyinyihtunlwin.talks.data.vo.TalksVO;
 import projects.nyinyihtunlwin.talks.network.TalksApi;
 import projects.nyinyihtunlwin.talks.network.responses.GetTalksResponse;
 import projects.nyinyihtunlwin.talks.utils.AppConstants;
+import projects.nyinyihtunlwin.talks.utils.ConfigUtils;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -30,7 +31,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TalksModel extends ViewModel {
 
-    private int mPageIndex = 1;
     private TalksApi mTalkApi;
 
     private MutableLiveData<List<TalksVO>> mTalksVOList;
@@ -62,8 +62,18 @@ public class TalksModel extends ViewModel {
         super.onCleared();
     }
 
-    public LiveData<List<TalksVO>> getTedTalks() {
-        Observable<GetTalksResponse> talksResponseObservable = mTalkApi.getTedTalkList(mPageIndex, AppConstants.ACCESS_TOKEN);
+    public LiveData<List<TalksVO>> loadMoreTedTalks() {
+        int i = ConfigUtils.getInstance().loadPageIndex();
+        return loadTedTalks(ConfigUtils.getInstance().loadPageIndex(), AppConstants.ACCESS_TOKEN);
+    }
+
+    public LiveData<List<TalksVO>> startLoadingTedTalks() {
+        ConfigUtils.getInstance().savePageIndex(1);
+        return loadTedTalks(ConfigUtils.getInstance().loadPageIndex(), AppConstants.ACCESS_TOKEN);
+    }
+
+    public LiveData<List<TalksVO>> loadTedTalks(int pageIndex, String accessToken) {
+        Observable<GetTalksResponse> talksResponseObservable = mTalkApi.getTedTalkList(pageIndex, accessToken);
         talksResponseObservable
                 .subscribeOn(Schedulers.io()) //run value creation code on a specific thread (non-UI thread)
                 .observeOn(AndroidSchedulers.mainThread()) //observe the emitted value of the Observable on an appropriate thread
@@ -73,10 +83,12 @@ public class TalksModel extends ViewModel {
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
-
                     @Override
                     public void onNext(@NonNull GetTalksResponse getTalksResponse) {
-                        mTalksVOList.setValue(getTalksResponse.getTalksVOList());
+                        if (getTalksResponse.getTalksVOList() != null && getTalksResponse.getTalksVOList().size() > 0) {
+                            mTalksVOList.setValue(getTalksResponse.getTalksVOList());
+                            ConfigUtils.getInstance().savePageIndex(getTalksResponse.getPage() + 1);
+                        }
                     }
 
                     @Override
