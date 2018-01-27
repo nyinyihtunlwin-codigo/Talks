@@ -34,7 +34,7 @@ public class PodcastsModel extends BaseModel {
     }
 
     public void initDatabase(Context context) {
-        mAppDatabase = AppDatabase.getInMemoryDatabase(context);
+        mAppDatabase = AppDatabase.getDatabase(context);
     }
 
     @Override

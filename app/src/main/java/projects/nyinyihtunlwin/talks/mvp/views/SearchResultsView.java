@@ -10,4 +10,5 @@ import projects.nyinyihtunlwin.talks.data.vo.SearchResultVO;
 
 public interface SearchResultsView {
     void displaySearchResults(List<SearchResultVO> searchResultVOList);
+    void showLoading();
 }

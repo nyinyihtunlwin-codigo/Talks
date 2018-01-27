@@ -10,4 +10,5 @@ import projects.nyinyihtunlwin.talks.data.vo.PlaylistsVO;
 
 public interface PlaylistsView {
     void displayPlaylists(List<PlaylistsVO> playlistsVOList);
+    void showLoading();
 }

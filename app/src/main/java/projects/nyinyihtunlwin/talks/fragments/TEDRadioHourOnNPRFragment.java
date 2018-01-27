@@ -66,8 +66,6 @@ public class TEDRadioHourOnNPRFragment extends BaseFragment implements PodcastsV
         rvRadioHourOnNPR.setAdapter(mAdapter);
         rvRadioHourOnNPR.setLayoutManager(new LinearLayoutManager(container.getContext()));
 
-        swipeRefreshLayout.setRefreshing(true);
-
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -97,5 +95,10 @@ public class TEDRadioHourOnNPRFragment extends BaseFragment implements PodcastsV
     public void displayPodcasts(List<PodcastsVO> podcastsVOList) {
         mAdapter.setNewData(podcastsVOList);
         swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void showLoading() {
+        swipeRefreshLayout.setRefreshing(true);
     }
 }

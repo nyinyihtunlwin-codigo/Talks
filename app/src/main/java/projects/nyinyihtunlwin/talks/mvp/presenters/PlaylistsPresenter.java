@@ -23,7 +23,6 @@ public class PlaylistsPresenter extends BasePresenter<PlaylistsView> {
         super();
         this.mPlaylistsModel = mPlaylistsModel;
         this.mLifeCycleOwner = lifecycleOwner;
-        startLoadingPlaylists(lifecycleOwner);
     }
 
     @Override
@@ -36,7 +35,12 @@ public class PlaylistsPresenter extends BasePresenter<PlaylistsView> {
         mPlaylistsModel.getPlaylists().observe(mLifeCycleOwner, new Observer<List<PlaylistsVO>>() {
             @Override
             public void onChanged(@Nullable List<PlaylistsVO> playlistsVOList) {
-                mView.displayPlaylists(playlistsVOList);
+                if (playlistsVOList != null && playlistsVOList.size() > 0) {
+                    mView.displayPlaylists(playlistsVOList);
+                } else {
+                    mView.showLoading();
+                    startLoadingPlaylists(mLifeCycleOwner);
+                }
             }
         });
     }

@@ -68,9 +68,6 @@ public class PlaylistsFragment extends BaseFragment implements PlaylistsView {
         rvPlaylists.setAdapter(mAdapter);
         rvPlaylists.setLayoutManager(new GridLayoutManager(container.getContext(), 2));
 
-        swipeRefreshLayout.setRefreshing(true);
-
-
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -99,5 +96,10 @@ public class PlaylistsFragment extends BaseFragment implements PlaylistsView {
     public void displayPlaylists(List<PlaylistsVO> playlistsVOList) {
         mAdapter.setNewData(playlistsVOList);
         swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void showLoading() {
+        swipeRefreshLayout.setRefreshing(true);
     }
 }

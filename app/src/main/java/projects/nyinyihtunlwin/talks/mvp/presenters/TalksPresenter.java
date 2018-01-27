@@ -24,7 +24,6 @@ public class TalksPresenter extends BasePresenter<TalksView> {
         super();
         this.mTalksModel = mTalksModel;
         this.mLifeCycleOwner = lifecycleOwner;
-        startLoadingTalks(lifecycleOwner);
     }
 
     @Override
@@ -38,7 +37,13 @@ public class TalksPresenter extends BasePresenter<TalksView> {
         mTalksModel.getmTalksVOList().observe(mLifeCycleOwner, new Observer<List<TalksVO>>() {
             @Override
             public void onChanged(@Nullable List<TalksVO> talksVOS) {
-                mView.displayTalksList(talksVOS);
+                if (talksVOS != null && talksVOS.size() > 0) {
+                    mView.displayTalksList(talksVOS);
+                } else {
+                    mView.showLoding();
+                    startLoadingTalks(mLifeCycleOwner);
+                }
+
             }
         });
     }

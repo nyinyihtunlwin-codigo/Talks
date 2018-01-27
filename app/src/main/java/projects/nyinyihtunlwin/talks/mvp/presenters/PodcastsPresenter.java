@@ -22,7 +22,6 @@ public class PodcastsPresenter extends BasePresenter<PodcastsView> {
         super();
         this.mPodcastModel = mPodcastModel;
         this.mLifeCycleOwner = lifecycleOwner;
-        startLoadingPodcasts(lifecycleOwner);
     }
 
     @Override
@@ -35,7 +34,12 @@ public class PodcastsPresenter extends BasePresenter<PodcastsView> {
         mPodcastModel.getPodcasts().observe(mLifeCycleOwner, new Observer<List<PodcastsVO>>() {
             @Override
             public void onChanged(@Nullable List<PodcastsVO> podcastsVOList) {
-                mView.displayPodcasts(podcastsVOList);
+                if (podcastsVOList != null && podcastsVOList.size() > 0) {
+                    mView.displayPodcasts(podcastsVOList);
+                } else {
+                    mView.showLoading();
+                    startLoadingPodcasts(mLifeCycleOwner);
+                }
             }
         });
     }

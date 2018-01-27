@@ -26,7 +26,7 @@ import projects.nyinyihtunlwin.talks.data.vo.PodcastsVO;
 import projects.nyinyihtunlwin.talks.data.vo.SearchResultVO;
 import projects.nyinyihtunlwin.talks.data.vo.TalksVO;
 
-@Database(entities = {TalksVO.class, PlaylistsVO.class, PodcastsVO.class, SearchResultVO.class}, version = 1,exportSchema = false)
+@Database(entities = {TalksVO.class, PlaylistsVO.class, PodcastsVO.class, SearchResultVO.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String DB_NAME = "PADC-TED_TALK.DB";
@@ -34,16 +34,18 @@ public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase INSTANCE;
 
     public abstract TedTalksDao tedTalksDao();
+
     public abstract PlaylistsDao playlistsDao();
+
     public abstract PodcastsDao podcastsDao();
+
     public abstract SearchResultsDao searchResultsDao();
 
-    public static AppDatabase getInMemoryDatabase(Context context) {
+    public static AppDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
             INSTANCE =
                     Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, DB_NAME)
-                            .allowMainThreadQueries() //Remove this after testing. Access to DB should always be from background thread.
-                            .build();
+                            .allowMainThreadQueries().build();
         }
         return INSTANCE;
     }

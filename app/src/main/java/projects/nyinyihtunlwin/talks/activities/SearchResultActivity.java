@@ -70,8 +70,6 @@ public class SearchResultActivity extends BaseActivity implements SearchResultsV
         rvSearchResult.setAdapter(mSearchResultAdapter);
         rvSearchResult.setLayoutManager(new LinearLayoutManager(this));
 
-        swipeRefreshLayout.setRefreshing(true);
-
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -110,5 +108,10 @@ public class SearchResultActivity extends BaseActivity implements SearchResultsV
     public void displaySearchResults(List<SearchResultVO> searchResultVOList) {
         mSearchResultAdapter.setNewData(searchResultVOList);
         swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void showLoading() {
+        swipeRefreshLayout.setRefreshing(true);
     }
 }

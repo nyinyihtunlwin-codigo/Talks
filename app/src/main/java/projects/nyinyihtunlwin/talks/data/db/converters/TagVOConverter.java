@@ -16,28 +16,28 @@ import projects.nyinyihtunlwin.talks.data.vo.TagVO;
  * Created by Dell on 1/26/2018.
  */
 
-public class Converters {
+public class TagVOConverter {
     @TypeConverter
-    public String fromCountryLangList(List<TagVO> countryLang) {
-        if (countryLang == null) {
+    public String fromTagVOList(List<TagVO> tagVOList) {
+        if (tagVOList == null) {
             return (null);
         }
         Gson gson = new Gson();
         Type type = new TypeToken<List<TagVO>>() {
         }.getType();
-        String json = gson.toJson(countryLang, type);
+        String json = gson.toJson(tagVOList, type);
         return json;
     }
 
     @TypeConverter
-    public List<TagVO> toCountryLangList(String countryLangString) {
-        if (countryLangString == null) {
+    public List<TagVO> toTagVOList(String tagVOString) {
+        if (tagVOString == null) {
             return (null);
         }
         Gson gson = new Gson();
         Type type = new TypeToken<List<TagVO>>() {
         }.getType();
-        List<TagVO> countryLangList = gson.fromJson(countryLangString, type);
+        List<TagVO> countryLangList = gson.fromJson(tagVOString, type);
         return countryLangList;
     }
 }

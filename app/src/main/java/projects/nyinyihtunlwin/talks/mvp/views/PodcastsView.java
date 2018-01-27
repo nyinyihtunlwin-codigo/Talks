@@ -10,4 +10,5 @@ import projects.nyinyihtunlwin.talks.data.vo.PodcastsVO;
 
 public interface PodcastsView {
     void displayPodcasts(List<PodcastsVO> podcastsVOList);
+    void showLoading();
 }

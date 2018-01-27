@@ -22,7 +22,7 @@ public class SearchResultsPresenter extends BasePresenter<SearchResultsView> {
         super();
         this.mSearchResultModel = mSearchResultModel;
         this.mLifeCycleOwner = lifecycleOwner;
-        startLoadingSearchResults(lifecycleOwner);
+
     }
 
     @Override
@@ -35,7 +35,12 @@ public class SearchResultsPresenter extends BasePresenter<SearchResultsView> {
         mSearchResultModel.getSearchResults().observe(mLifeCycleOwner, new Observer<List<SearchResultVO>>() {
             @Override
             public void onChanged(@Nullable List<SearchResultVO> searchResultVOList) {
-                mView.displaySearchResults(searchResultVOList);
+                if (searchResultVOList != null && searchResultVOList.size() > 0) {
+                    mView.displaySearchResults(searchResultVOList);
+                } else {
+                    mView.showLoading();
+                    startLoadingSearchResults(mLifeCycleOwner);
+                }
             }
         });
     }

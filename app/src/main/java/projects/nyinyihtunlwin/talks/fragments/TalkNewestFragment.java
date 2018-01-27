@@ -70,8 +70,6 @@ public class TalkNewestFragment extends BaseFragment implements TalksView, Lifec
         rvNewest.setAdapter(mAdapter);
         rvNewest.setLayoutManager(new LinearLayoutManager(container.getContext()));
 
-        swipeRefreshLayout.setRefreshing(true);
-
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -100,5 +98,10 @@ public class TalkNewestFragment extends BaseFragment implements TalksView, Lifec
     public void displayTalksList(List<TalksVO> talksList) {
         mAdapter.setNewData(talksList);
         swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void showLoding() {
+        swipeRefreshLayout.setRefreshing(true);
     }
 }

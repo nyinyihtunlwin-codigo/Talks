@@ -10,4 +10,5 @@ import projects.nyinyihtunlwin.talks.data.vo.TalksVO;
 
 public interface TalksView {
     void displayTalksList(List<TalksVO> talksList);
+    void showLoding();
 }
